@@ -1,0 +1,28 @@
+{
+  "name": "heroku-ironmq",
+  "description": "IronMQ client library for use inside Heroku platform",
+  "version": "0.0.1",
+  "homepage": "",
+  "author": "Jerry Jalava <jerry.jalava@nemein.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nemein/heroku-ironmq.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "0.6.x"
+  },
+  "dependencies": {
+    "underscore": "1.x.x",
+    "request": "2.9.x"
+  },
+  "devDependencies": {
+    "mocha": "1.0.x",
+    "should": "0.6.x",
+    "nock" : "0.12.x"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha -R spec --require should"
+  }
+}
+
