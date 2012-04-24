@@ -19,7 +19,8 @@
   "devDependencies": {
     "mocha": "1.0.x",
     "should": "0.6.x",
-    "nock" : "0.12.x"
+    "nock" : "0.12.x",
+    "docco": "0.3.x"
   },
   "scripts": {
     "test": "NODE_ENV=test mocha -R spec --require should"

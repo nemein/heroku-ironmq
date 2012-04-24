@@ -1,2 +1,3 @@
 *.tmproj
 node_modules/*
+docs/*
