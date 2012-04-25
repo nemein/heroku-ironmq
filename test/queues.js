@@ -55,6 +55,33 @@ if (test_data.use_proxy) {
       "msg": "cleared"
     }
   );
+
+  var req = nock('https://mq-aws-us-east-1.iron.io:443')
+  .matchHeader('authorization','OAuth ' + test_data.token)
+  .matchHeader('content-type','application/json')
+  .matchHeader('user-agent','IronMQ Node Client for Heroku')
+  .get('/1/projects/' + TEST_PROJECT + '/queues/' + TEST_QUEUE)
+  .reply(
+    200,
+    {
+      "size": 0
+    }
+  );  
+  var req = nock('https://mq-aws-us-east-1.iron.io:443')
+  .matchHeader('authorization','OAuth ' + test_data.token)
+  .matchHeader('content-type','application/json')
+  .matchHeader('user-agent','IronMQ Node Client for Heroku')
+  .post(
+    '/1/projects/' + TEST_PROJECT + '/queues/' + TEST_QUEUE + '/messages',
+    {"messages": [{"body": "test message body"}]}
+  )
+  .reply(
+    200,
+    {
+      "ids": ["1234567890"],
+      "msg": "Messages put on queue."
+    }
+  );
 }
 
 describe('IronMQ::queues', function(){
@@ -97,6 +124,21 @@ describe('IronMQ::queues', function(){
       queue.clear(function(err, status) {
         if (err) return;
         status.should.be.true;
+        done();
+      });
+    });
+  });
+  it('should create new message with single item', function(done) {
+    var instance = new ironmq({token: test_data.token, project: TEST_PROJECT});
+    
+    instance.project.queues(TEST_QUEUE, function(err, queue) {
+      if (err) return;
+      queue.should.be.a('object');
+      queue.newMessage.should.ok;
+      queue.newMessage.should.be.a('function');
+      queue.newMessage({body: 'test message body'}, function(err, ids) {
+        if (err) return;
+        ids.should.have.lengthOf(1);
         done();
       });
     });
