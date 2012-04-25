@@ -1,5 +1,7 @@
 # IronMQ client library with Heroku support
 
+License: MIT
+
 ## Usage
 
     var ironmq = require('ironmq');
@@ -9,9 +11,9 @@
     client.project.queues(function(err, queues) {
       queues.forEach(function(queue) {
         console.log(queue.name());
-      
+        
         if (!queues.length) return;
-      
+        
         // Get all messages from first queue
         queues[0].messages(function(err, messages) {
           messages.forEach(function(msg) {

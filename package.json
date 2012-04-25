@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "homepage": "",
   "author": "Jerry Jalava <jerry.jalava@nemein.com>",
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/mit-license.php"
+  }],
   "repository": {
     "type": "git",
     "url": "git://github.com/nemein/heroku-ironmq.git"
