@@ -44,13 +44,14 @@ if (test_data.use_proxy) {
       "size": 0
     }
   );
+  
   var req = nock('https://mq-aws-us-east-1.iron.io:443')
   .matchHeader('authorization','OAuth ' + test_data.token)
   .matchHeader('content-type','application/json')
   .matchHeader('user-agent','IronMQ Node Client for Heroku')
   .post('/1/projects/' + TEST_PROJECT + '/queues/' + TEST_QUEUE + '/clear')
   .reply(
-    200,
+    201,
     {
       "msg": "cleared"
     }
@@ -76,7 +77,7 @@ if (test_data.use_proxy) {
     {"messages": [{"body": "test message body"}]}
   )
   .reply(
-    200,
+    201,
     {
       "ids": ["1234567890"],
       "msg": "Messages put on queue."
